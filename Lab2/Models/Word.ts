@@ -8,7 +8,7 @@ export class Word extends Token {
     this.Lexeme = lexeme;
   }
 
-  ToString(): string {
+  override ToString(): string {
     return this.Lexeme;
   }
 }
