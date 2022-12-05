@@ -1,0 +1,25 @@
+0;32-bit integer;0
+1;variable <counter> of type <0>;1
+5;assign_operation;0
+4;integer with value = 1;1
+2;semicolon;1
+3;while;0
+2;(;3
+1;variable <counter>;1
+5;more_operation;8
+5;subtract_operation;2
+4;integer with value = 10;10
+2;);4
+2;{;7
+1;variable <counter>;1
+5;assign_operation;0
+1;variable <counter>;1
+5;subtract_operation;2
+4;integer with value = 1;1
+2;semicolon;1
+2;};8
+0;32-bit integer;0
+1;variable <a> of type <0>;2
+5;assign_operation;0
+4;integer with value = 10;10
+2;semicolon;1

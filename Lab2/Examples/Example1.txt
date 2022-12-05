@@ -1,0 +1,15 @@
+{
+    int counter;
+    int test;
+    counter = 10;
+    test = 15;
+
+    while (test < 50) {
+        if (test / 2 == 1) {
+            counter = test;
+            test = test + 1;
+        } else {
+            test = test + 1;
+        }
+    }
+}

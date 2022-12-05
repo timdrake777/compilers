@@ -1,8 +1,8 @@
 export class Token {
 
-    Tag: number
+    Tag: number | string
 
-    constructor(tag: number) {
+    constructor(tag: number | string) {
         this.Tag = tag;
     }
 
