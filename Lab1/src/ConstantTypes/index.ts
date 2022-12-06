@@ -55,84 +55,84 @@ export const Operations: IType[] = [
   {
     type: "+",
     attributes: {
-      id: 0,
+      id: 1,
       comment: "sum_operation",
     },
   },
   {
     type: "-",
     attributes: {
-      id: 0,
+      id: 2,
       comment: "subtract_operation",
     },
   },
   {
     type: "*",
     attributes: {
-      id: 0,
+      id: 3,
       comment: "multiply_operation",
     },
   },
   {
     type: "/",
     attributes: {
-      id: 0,
+      id: 4,
       comment: "divide_operation",
     },
   },
   {
     type: "+=",
     attributes: {
-      id: 0,
+      id: 5,
       comment: "add_amount_operation",
     },
   },
   {
     type: "-=",
     attributes: {
-      id: 0,
+      id: 6,
       comment: "subtract_amount_operation",
     },
   },
   {
     type: "==",
     attributes: {
-      id: 0,
+      id: 7,
       comment: "are_equal_operation",
     },
   },
   {
     type: ">",
     attributes: {
-      id: 0,
+      id: 8,
       comment: "more_operation",
     },
   },
   {
     type: "<",
     attributes: {
-      id: 0,
+      id: 9,
       comment: "less_operation",
     },
   },
   {
     type: "++",
     attributes: {
-      id: 0,
+      id: 10,
       comment: "increment_operation",
     },
   },
   {
     type: "--",
     attributes: {
-      id: 0,
+      id: 11,
       comment: "decrement_operation",
     },
   },
   {
     type: "%",
     attributes: {
-      id: 0,
+      id: 12,
       comment: "modulo_operation",
     },
   },
