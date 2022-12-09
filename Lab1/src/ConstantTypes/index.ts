@@ -42,6 +42,13 @@ export const Types: IType[] = [
       comment: "string of chars",
     },
   },
+  {
+    type: "boolean",
+    attributes: {
+      id: 5,
+      comment: "boolean type",
+    },
+  },
 ];
 
 export const Operations: IType[] = [
@@ -159,4 +166,5 @@ export const KeySymbols: string[] = [
   "]",
   "{",
   "}",
+  "\"",
 ];

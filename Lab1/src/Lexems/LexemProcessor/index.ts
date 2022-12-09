@@ -37,10 +37,10 @@ const LexemTypes: ILexemTypes = {
 interface ILexemsArray {
   type: number;
   lexem: string;
-  value: number;
+  value: number | string;
 }
 
-interface IVariablesArray {
+export interface IVariablesArray {
   id: number;
   dataType: string;
   name: string;
@@ -80,7 +80,7 @@ export default (path: string) => {
     return null;
   };
 
-  const addLexem = (lexemType: number, id: number, comment: string) => {
+  const addLexem = (lexemType: number, id: number | string, comment: string) => {
     lexems.push({ type: lexemType, lexem: comment, value: id });
   };
 
@@ -201,7 +201,7 @@ export default (path: string) => {
               lexems.push({
                 type: LexemTypes.Variable,
                 value: variablesCount,
-                lexem: `variable <${buffer}> of type <${variableType.type}>`,
+                lexem: `variable <${buffer}> of type <${variableType.lexem}>`,
               });
               clearBuffer();
             } else {
@@ -240,7 +240,12 @@ export default (path: string) => {
 
         if (searchKeyResult !== -1) {
           addLexem(LexemTypes.Delimeter, searchKeyResult, buffer);
-          state = LexemProcessorStates.Idle;
+          if (searchKeyResult === 9) {
+            state = LexemProcessorStates.ReadString;
+
+          } else {
+            state = LexemProcessorStates.Idle;
+          }
           clearBuffer();
         } else if (searchOperatorsResult !== -1) {
           const nextOperator = searchNextInOperationsDictionary();
@@ -273,6 +278,30 @@ export default (path: string) => {
           );
           state = LexemProcessorStates.Error;
         }
+        break;
+      }
+
+      case LexemProcessorStates.ReadString: {
+        
+        if (currentChar === "\"") {
+          addLexem(
+            LexemTypes.Constant,
+            buffer,
+            `string with value = ${buffer}`
+          );
+          state = LexemProcessorStates.Idle;
+          clearBuffer();
+        } else if (currentChar === ";") {
+          addLexem(
+            LexemTypes.ParsingError,
+            -1,
+            `Error at ${pointer}: Could not parse1 ${buffer}!`
+          );
+          state = LexemProcessorStates.Error
+        } else {
+          buffer += currentChar;
+        }
+        [pointer, currentChar] = getNextChar(file, pointer);
         break;
       }
 

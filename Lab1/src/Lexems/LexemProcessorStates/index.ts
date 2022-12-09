@@ -4,6 +4,7 @@ interface ILexemStates {
   readonly Delimeter: number;
   readonly Completed: number;
   readonly ReadingIdentifier: number;
+  readonly ReadString: number;
   readonly Assign: number;
   readonly Error: number;
   readonly Final: number;
@@ -17,6 +18,7 @@ const LexemProcessorStates: ILexemStates = {
   Delimeter: 3,
   Completed: 4,
   ReadingIdentifier: 5,
+  ReadString: 6,
   Assign: 6,
   Error: 7,
   Final: 8,
