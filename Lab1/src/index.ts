@@ -10,7 +10,7 @@ var temp = "";
 for (let i = 0; i < result.lexems.length; i++) {
   temp += `${result.lexems[i].type};${
     result.lexems[i].lexem === ";" ? "semicolon" : result.lexems[i].lexem
-  };${result.lexems[i].value}\n`;
+  };${result.lexems[i].value};${result.lexems[i].line}\n`;
 }
 fs.writeFileSync("./src/Examples/answer.txt", temp);
 // Parser()

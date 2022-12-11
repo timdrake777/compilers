@@ -38,6 +38,7 @@ interface ILexemsArray {
   type: number;
   lexem: string;
   value: number | string;
+  line: number;
 }
 
 export interface IVariablesArray {
@@ -56,6 +57,7 @@ export default (path: string) => {
   let seekingBuffer = "";
   let variables: IVariablesArray[] = [];
   let lexems: ILexemsArray[] = [];
+  let countOfLine : number = 1;
 
   const getNextChar: IGetChar = (file: string, pointer: number) => {
     let newPointer: number = ++pointer;
@@ -80,8 +82,8 @@ export default (path: string) => {
     return null;
   };
 
-  const addLexem = (lexemType: number, id: number | string, comment: string) => {
-    lexems.push({ type: lexemType, lexem: comment, value: id });
+  const addLexem = (lexemType: number, id: number | string, comment: string, line: number) => {
+    lexems.push({ type: lexemType, lexem: comment, value: id, line: line });
   };
 
   const isDigit = (char: string) => {
@@ -148,6 +150,9 @@ export default (path: string) => {
         }
 
         if (isEmptyOrNextLine(currentChar)) {
+          if (currentChar === "\n") {
+            countOfLine++;
+          }
           [pointer, currentChar] = getNextChar(file, pointer);
         } else if (isDigit(currentChar)) {
           clearBuffer();
@@ -174,13 +179,14 @@ export default (path: string) => {
           let lexemRef: string | null = SearchInLexemDictionary(buffer);
           let typeRef: IType | null = SearchInTypesDictionary(buffer);
           if (lexemRef) {
-            addLexem(LexemTypes.Identifier, 0, lexemRef);
+            addLexem(LexemTypes.Identifier, 0, lexemRef, countOfLine);
             clearBuffer();
           } else if (typeRef) {
             addLexem(
               LexemTypes.DataType,
               typeRef.attributes.id,
-              typeRef.attributes.comment
+              typeRef.attributes.comment,
+              countOfLine
             );
             clearBuffer();
           } else {
@@ -202,6 +208,7 @@ export default (path: string) => {
                 type: LexemTypes.Variable,
                 value: variablesCount,
                 lexem: `variable <${buffer}> of type <${variableType.lexem}>`,
+                line: countOfLine
               });
               clearBuffer();
             } else {
@@ -209,6 +216,7 @@ export default (path: string) => {
                 type: LexemTypes.Variable,
                 value: variables.find((item) => item.name === buffer)?.id || -1,
                 lexem: `variable <${buffer}>`,
+                line: countOfLine
               });
               clearBuffer();
             }
@@ -226,7 +234,8 @@ export default (path: string) => {
           addLexem(
             LexemTypes.Constant,
             +buffer,
-            `integer with value = ${buffer}`
+            `integer with value = ${buffer}`,
+            countOfLine
           );
           clearBuffer();
           state = LexemProcessorStates.Idle;
@@ -239,7 +248,7 @@ export default (path: string) => {
         const searchOperatorsResult = searchInOperationsDictionary();
 
         if (searchKeyResult !== -1) {
-          addLexem(LexemTypes.Delimeter, searchKeyResult, buffer);
+          addLexem(LexemTypes.Delimeter, searchKeyResult, buffer, countOfLine);
           if (searchKeyResult === 9) {
             state = LexemProcessorStates.ReadString;
 
@@ -256,7 +265,8 @@ export default (path: string) => {
             addLexem(
               LexemTypes.Operation,
               nextOperator.attributes.id,
-              nextOperator.attributes.comment
+              nextOperator.attributes.comment,
+              countOfLine
             );
             state = LexemProcessorStates.Idle;
 
@@ -265,7 +275,8 @@ export default (path: string) => {
             addLexem(
               LexemTypes.Operation,
               searchOperatorsResult.attributes.id,
-              searchOperatorsResult.attributes.comment
+              searchOperatorsResult.attributes.comment,
+              countOfLine
             );
             state = LexemProcessorStates.Idle;
             clearBuffer();
@@ -274,7 +285,8 @@ export default (path: string) => {
           addLexem(
             LexemTypes.ParsingError,
             -1,
-            `Error at ${pointer}: Could not parse ${buffer}!`
+            `Error at ${pointer}: Could not parse ${buffer}!`,
+            countOfLine
           );
           state = LexemProcessorStates.Error;
         }
@@ -287,12 +299,14 @@ export default (path: string) => {
           addLexem(
             LexemTypes.Constant,
             buffer,
-            `string with value = ${buffer}`
+            `string with value = ${buffer}`,
+            countOfLine
           );
           addLexem(
             LexemTypes.Delimeter,
             9,
-            "\""
+            "\"",
+            countOfLine
           );
           state = LexemProcessorStates.Idle;
           clearBuffer();
@@ -300,7 +314,8 @@ export default (path: string) => {
           addLexem(
             LexemTypes.ParsingError,
             -1,
-            `Error at ${pointer}: Could not parse ${buffer}!`
+            `Error at ${pointer}: Could not parse ${buffer}!`,
+            countOfLine
           );
           state = LexemProcessorStates.Error
         } else {
