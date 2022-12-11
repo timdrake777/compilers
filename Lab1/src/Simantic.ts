@@ -17,7 +17,7 @@ export default function Simantic(variables: IVariablesArray[]) {
         (item) => item.id === varValue
       );
       if (!foundVar) {
-        console.log(`Error: var is not declaration at ${i + 1} line`);
+        console.log(`Error: var is not declaration at ${line[3]} line`);
         err = true;
         break;
       }
@@ -33,7 +33,7 @@ export default function Simantic(variables: IVariablesArray[]) {
         } else if (varValue === 4 && lastType.dataType === "string of chars") {
           lastType = null;
         } else {
-          console.log(`Error: Illegal types at ${i + 1} line`);
+          console.log(`Error: Illegal types at ${line[3]} line`);
           err = true;
           break;
         }
@@ -49,31 +49,31 @@ export default function Simantic(variables: IVariablesArray[]) {
     }
     if (type === "5") {
       if (lastType?.dataType === "string of chars" && varValue > 1) {
-        console.log(`Error: Illegal types at ${i + 1} line`);
+        console.log(`Error: Illegal types at ${line[3]} line`);
         err = true;
         break;
       }
       continue;
     }
-    if (type === "4") {
+    if (type === "4") {      
       if (lastType) {
         if (
           (lastType.dataType === "32-bit integer" ||
             lastType.dataType === "32-bit unsigned integer" ||
             lastType.dataType === "64-bit integer" ||
             lastType.dataType === "64-bit unsigned integer") &&
-          Number.parseInt(varValue as string) !== NaN
+          Number.parseInt(varValue as string)
         ) {
           continue;
         } else if (lastType.dataType === "string of chars" && !Number.parseInt(varValue as string)) {
           continue;
         } else {
-          console.log(`Error: Illegal types at ${i + 1} line`);
+          console.log(`Error: Illegal types at ${line[3]} line`);
           err = true;
           break;
         }
       } else {
-        console.log(`Error: Illegal types at ${i + 1} line`);
+        console.log(`Error: Illegal types at ${line[3]} line`);
         err = true;
         break;
       }
