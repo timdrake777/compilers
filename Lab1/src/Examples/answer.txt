@@ -21,5 +21,7 @@
 0;string of chars;4
 1;variable <a> of type <string of chars>;2
 5;assign_operation;0
-4;integer with value = 10;10
+2;";9
+4;string with value = hello;hello
+2;";9
 2;semicolon;1

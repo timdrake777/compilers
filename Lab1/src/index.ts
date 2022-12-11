@@ -4,7 +4,6 @@ import Parser from "./Parser";
 import Simantic from "./Simantic";
 
 const result = LexemProcessor("./src/Examples/while.txt");
-console.log(result.variables);
 
 var temp = "";
 
