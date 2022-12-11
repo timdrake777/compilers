@@ -289,13 +289,18 @@ export default (path: string) => {
             buffer,
             `string with value = ${buffer}`
           );
+          addLexem(
+            LexemTypes.Delimeter,
+            9,
+            "\""
+          );
           state = LexemProcessorStates.Idle;
           clearBuffer();
         } else if (currentChar === ";") {
           addLexem(
             LexemTypes.ParsingError,
             -1,
-            `Error at ${pointer}: Could not parse1 ${buffer}!`
+            `Error at ${pointer}: Could not parse ${buffer}!`
           );
           state = LexemProcessorStates.Error
         } else {

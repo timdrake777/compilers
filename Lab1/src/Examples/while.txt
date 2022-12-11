@@ -4,6 +4,6 @@ while (counter > -10) {
     counter = counter - 1;
 }
 
-string a = 10;
+string a = "hello";
 
 

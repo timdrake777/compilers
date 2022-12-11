@@ -22,8 +22,6 @@ export default function Simantic(variables: IVariablesArray[]) {
         break;
       }
       if (lastType) {
-        // console.log(lastType, i);
-
         if (
           varValue < 4 &&
           (lastType.dataType === "32-bit integer" ||
@@ -45,7 +43,7 @@ export default function Simantic(variables: IVariablesArray[]) {
       }
       continue;
     }
-    if (type === "2") {
+    if (type === "2" && varValue !== 9) {
       lastType = null;
       continue;
     }
@@ -67,8 +65,7 @@ export default function Simantic(variables: IVariablesArray[]) {
           Number.parseInt(varValue as string) !== NaN
         ) {
           continue;
-        } else if (lastType.dataType === "string of chars" && Number.parseInt(varValue as string) === NaN) {
-          console.log(lastType, i);
+        } else if (lastType.dataType === "string of chars" && !Number.parseInt(varValue as string)) {
           continue;
         } else {
           console.log(`Error: Illegal types at ${i + 1} line`);
