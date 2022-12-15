@@ -207,7 +207,7 @@ export default (path: string) => {
               lexems.push({
                 type: LexemTypes.Variable,
                 value: variablesCount,
-                lexem: `variable <${buffer}> of type <${variableType.lexem}>`,
+                lexem: `variable <${buffer}> of type <${0}>`,
                 line: countOfLine
               });
               clearBuffer();
