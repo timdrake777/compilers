@@ -1,0 +1,7 @@
+var counter = 1
+while (counter > -10) {
+	counter = counter - 1
+}
+var b = 10
+b = counter * 10
+var a = "sgf"

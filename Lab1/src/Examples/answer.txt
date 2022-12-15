@@ -1,5 +1,5 @@
 0;32-bit integer;0;1
-1;variable <counter> of type <32-bit integer>;1;1
+1;variable <counter> of type <0>;1;1
 5;assign_operation;0;1
 4;integer with value = 1;1;1
 2;semicolon;1;1
@@ -19,14 +19,20 @@
 2;semicolon;1;4
 2;};8;5
 0;32-bit integer;0;7
-1;variable <b> of type <32-bit integer>;2;7
+1;variable <b> of type <0>;2;7
 5;assign_operation;0;7
-2;";9;7
-4;string with value = fd;fd;7
-2;";9;7
+4;integer with value = 10;10;7
 2;semicolon;1;7
-0;string of chars;4;9
-1;variable <a> of type <string of chars>;3;9
+1;variable <b>;2;9
 5;assign_operation;0;9
+1;variable <counter>;1;9
+5;multiply_operation;3;9
 4;integer with value = 10;10;9
 2;semicolon;1;9
+0;string of chars;4;11
+1;variable <a> of type <0>;3;11
+5;assign_operation;0;11
+2;";9;11
+4;string with value = sgf;sgf;11
+2;";9;11
+2;semicolon;1;11

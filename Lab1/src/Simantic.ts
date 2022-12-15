@@ -13,9 +13,7 @@ export default function Simantic(variables: IVariablesArray[]) {
     let type = line[0];
     let varValue = Number.parseInt(line[2]) || line[2];
     if (type === "1") {
-      let foundVar: IVariablesArray | undefined = variables.find(
-        (item) => item.id === varValue
-      );
+      let foundVar: IVariablesArray | undefined = variables.find((item) => item.id === varValue);
       if (!foundVar) {
         console.log(`Error: var is not declaration at ${line[3]} line`);
         err = true;
@@ -55,7 +53,7 @@ export default function Simantic(variables: IVariablesArray[]) {
       }
       continue;
     }
-    if (type === "4") {      
+    if (type === "4") {
       if (lastType) {
         if (
           (lastType.dataType === "32-bit integer" ||
@@ -65,19 +63,25 @@ export default function Simantic(variables: IVariablesArray[]) {
           Number.parseInt(varValue as string)
         ) {
           continue;
-        } else if (lastType.dataType === "string of chars" && !Number.parseInt(varValue as string)) {
+        } else if (
+          lastType.dataType === "string of chars" &&
+          !Number.parseInt(varValue as string)
+        ) {
           continue;
         } else {
           console.log(`Error: Illegal types at ${line[3]} line`);
           err = true;
-          break;
         }
       } else {
-        console.log(`Error: Illegal types at ${line[3]} line`);
         err = true;
-        break;
+        console.log(`Error: Illegal types at ${line[3]} line`);
       }
     }
   }
-  if (!err) console.log(1);
+  if (!err) {
+    console.log(1);
+    return "";
+  } else {
+    return "error";
+  }
 }

@@ -4,6 +4,8 @@ while (counter > -10) {
     counter = counter - 1;
 }
 
-int b = "fd";
+int b = 10;
 
-string a = 10;
+b = counter * 10;
+
+string a = "sgf";

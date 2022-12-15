@@ -1,0 +1,33 @@
+Declaration node:
+32-bit integer
+Node: assign_operation
+counter
+1
+While node:
+while
+Node: more_operation
+counter
+Node: subtract_operation
+10
+While-operation node:
+Node: assign_operation
+counter
+Node: subtract_operation
+counter
+1
+Declaration node:
+32-bit integer
+Node: assign_operation
+b
+10
+Operation node:
+Node: assign_operation
+b
+Node: multiply_operation
+counter
+10
+Declaration node:
+string of chars
+Node: assign_operation
+a
+sgf
